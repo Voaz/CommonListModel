@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
 
-    CommonListModel model();
+    CommonListModel model;
     QQmlContext *ctx = engine.rootContext();
     ctx->setContextProperty("mymodel", &model);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

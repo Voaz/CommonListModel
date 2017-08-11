@@ -8,6 +8,8 @@ Window {
     title: qsTr("Hello World")
 
     ListView {
+        anchors.fill: parent
         model: mymodel
+        delegate: Text { text: "Animal: " + onerole + ", " + tworole }
     }
 }

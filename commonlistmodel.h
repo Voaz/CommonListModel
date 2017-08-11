@@ -15,6 +15,10 @@ class CommonListModel : public QAbstractListModel {
     Q_OBJECT
 
 public:
+    enum ModelRoles {
+        OneRole = Qt::UserRole + 1,
+        TwoRole
+    };
     explicit CommonListModel(QObject *parent = nullptr);
 
     // Header:
@@ -39,6 +43,9 @@ public:
     // Remove data:
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
+    QHash<int, QByteArray> roleNames() const;
+private slots:
+    void updateData();
 private:
     QList<CommonListItem> _items;
 };
