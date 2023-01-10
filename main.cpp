@@ -1,10 +1,3 @@
-/*****************************************************************************
- * %{Cpp:License:FileName}
- *
- * Created: 8 2017 by amir
- *
- * Copyright 2017 "INTERSET". All rights reserved.
-**************************************************************************/
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>

@@ -1,10 +1,3 @@
-/*****************************************************************************
- * commonlistitem.cpp
- *
- * Created: 8 2017 by amir
- *
- * Copyright 2017 "INTERSET". All rights reserved.
-**************************************************************************/
 #include "commonlistitem.h"
 
 CommonListItem::CommonListItem(QVariantList data) : _data(data){

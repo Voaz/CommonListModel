@@ -1,12 +1,6 @@
-/*****************************************************************************
- * commonlistmodel.cpp
- *
- * Created: 8 2017 by amir
- *
- * Copyright 2017 "INTERSET". All rights reserved.
-**************************************************************************/
 #include "commonlistmodel.h"
 
+#include <QRandomGenerator>
 #include <QTimer>
 
 CommonListModel::CommonListModel(QObject *parent)
@@ -20,20 +14,23 @@ CommonListModel::CommonListModel(QObject *parent)
     _items.push_back(item1);
     _items.push_back(item2);
     _items.push_back(item3);
-    QTimer *_timer = new QTimer();
-    connect(_timer, &QTimer::timeout, this, &CommonListModel::updateData);
+
+    QTimer *_timer = new QTimer(this); //Hi
+    connect(_timer, &QTimer::timeout, this, &CommonListModel::exampleDataUpdate);
     _timer->setInterval(2000);
     _timer->start();
 
 }
 
 QVariant CommonListModel::headerData(int section, Qt::Orientation orientation, int role) const {
-    // FIXME: Implement me!
+    Q_UNUSED(section);
+    Q_UNUSED(orientation);
+    Q_UNUSED(role);
+    return QVariant();
 }
 
 bool CommonListModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role) {
     if (value != headerData(section, orientation, role)) {
-        // FIXME: Implement me!
         emit headerDataChanged(orientation, section, section);
         return true;
     }
@@ -69,24 +66,24 @@ QVariant CommonListModel::data(const QModelIndex &index, int role) const {
 bool CommonListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (data(index, role) != value) {
-        // FIXME: Implement me!
-        _items[index.row()][role] = value;
-        emit dataChanged(index, index, QVector<int>() << (role == 0 ? OneRole : TwoRole));
+        //you can avoid this nonesence with a "short if"
+        //if you use a dictionary with a role keys for example
+        _items[index.row()][role == OneRole ? 0 : 1] = value;
+        emit dataChanged(index, index, QVector<int>() << role);
         return true;
     }
     return false;
 }
 
 Qt::ItemFlags CommonListModel::flags(const QModelIndex &index) const {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return Qt::NoItemFlags;
-
-    return Qt::ItemIsEditable; // FIXME: Implement me!
+    }
+    return Qt::ItemIsEditable;
 }
 
 bool CommonListModel::insertRows(int row, int count, const QModelIndex &parent) {
     beginInsertRows(parent, row, row + count - 1);
-    // FIXME: Implement me!
     for (int i = 0; i < count; i++) {
         CommonListItem item(QVariantList() << "one14q" << "two22q");
         _items.insert(i + row, item);
@@ -112,6 +109,11 @@ QHash<int, QByteArray> CommonListModel::roleNames() const {
     return roles;
 }
 
-void CommonListModel::updateData() {
-    setData(createIndex(1, 0), QVariant("lolololo" + QString::number(qrand() * 10 + 100)), 0);
+void CommonListModel::exampleDataUpdate() {
+    QVariant newData = QVariant("some data" + QString::number(QRandomGenerator::system()->bounded(0, 100)));
+    //set new data for an item in a row #2 for a role = "tworole"
+    setData(createIndex(2, 0), newData, ModelRoles::TwoRole);
+}
+
+CommonListModel::~CommonListModel(){
 }

@@ -1,16 +1,9 @@
-/*****************************************************************************
- * commonlistmodel.h
- *
- * Created: 8 2017 by amir
- *
- * Copyright 2017 "INTERSET". All rights reserved.
-**************************************************************************/
 #ifndef COMMONLISTMODEL_H
 #define COMMONLISTMODEL_H
 
 #include <QAbstractListModel>
 #include <QList>
-#include <commonlistitem.h>
+#include "commonlistitem.h"
 class CommonListModel : public QAbstractListModel {
     Q_OBJECT
 
@@ -43,9 +36,11 @@ public:
     // Remove data:
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const override;
+
+    virtual ~CommonListModel();
 private slots:
-    void updateData();
+    void exampleDataUpdate();
 private:
     QList<CommonListItem> _items;
 };

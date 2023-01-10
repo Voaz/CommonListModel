@@ -1,10 +1,3 @@
-/*****************************************************************************
- * commonlistitem.h
- *
- * Created: 8 2017 by amir
- *
- * Copyright 2017 "INTERSET". All rights reserved.
-**************************************************************************/
 #ifndef COMMONLISTITEM_H
 #define COMMONLISTITEM_H
 

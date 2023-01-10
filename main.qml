@@ -7,7 +7,7 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Behold the beauty!")
     Item {
         id: root
         anchors.fill: parent
@@ -43,12 +43,12 @@ Window {
                 TableViewColumn {
                     width: 180
                     role: "onerole"
-                    title: "One Role"
+                    title: "Role 1"
                 }
                 TableViewColumn {
                     width: 180
                     role: "tworole"
-                    title: "Two Role"
+                    title: "Role 2"
                 }
             }
         }
